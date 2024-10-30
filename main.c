@@ -6239,8 +6239,8 @@ int main (void)
 	BackupHostInit();	
 	CameraSetAddr();
 	WDTInit();
-	ChkOnlineIdFlag 	= 0;
-	InitAddFlag();
+	//ChkOnlineIdFlag 	= 0;
+	//InitAddFlag();
 	while (1){
 		/*********************ID模式下广播冲突ID*******************/
 		if ((IDRepeat==TRUE)&&(SysInfo.MeetSta==SET_ID_STATE)){ 		  
@@ -6317,7 +6317,7 @@ int main (void)
 		/************************喂狗**************************/
 		WDTFeed();
 		/******串口发送update,回车回到boot,等待用户输入update更新应用层******/
-		/*if(u8UARTReceive(&tempDate)>0)
+		/*if(u8UARTReceive(&tempDate)>0)		//先屏蔽不使用
 		{
 			if(tempDate==0x20)              //空格键
 			{
@@ -6343,12 +6343,16 @@ int main (void)
 						len= 0;
 			}
 		}*/
-		
 	}
 }
-/*void uip_log(char *m)		//20241029_clone分支修改
+/*void uip_log(char *m)		//20241029_clone分支修改+other person remove update function
 {
 	;
+	//printf("无用，单纯测试");
+}*/
+/*void last_func(void)
+{
+	//printf("send debug message\n");
 }*/
 /*********************************************************************************************************
   End Of File
