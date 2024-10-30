@@ -6239,8 +6239,8 @@ int main (void)
 	BackupHostInit();	
 	CameraSetAddr();
 	WDTInit();
-	ChkOnlineIdFlag 	= 0;
-	InitAddFlag();
+	//ChkOnlineIdFlag 	= 0;
+	//InitAddFlag();
 	while (1){
 		/*********************ID模式下广播冲突ID*******************/
 		if ((IDRepeat==TRUE)&&(SysInfo.MeetSta==SET_ID_STATE)){ 		  
@@ -6316,37 +6316,10 @@ int main (void)
 		ADC_Check();
 		/************************喂狗**************************/
 		WDTFeed();
-		/******串口发送update,回车回到boot,等待用户输入update更新应用层******/
-		if(u8UARTReceive(&tempDate)>0)
-		{
-			if(tempDate==0x20)              //空格键
-			{
-					len = 0;
-					vUARTSend(konggejian, sizeof(konggejian));           //please input a update command
-			}
-			else if(tempDate==0x0D)         //回车键 
-			{
-					if((memcmp(uartBuffer,"update",6)==0)||(memcmp(uartBuffer,"Update",6)==0))
-					{
-						vUARTSend(update_app, sizeof(update_app));
-						App_boot_pSysInfo->download = 5;
-						//u32IAP_CopyRAMToFlash(FLASH_APP_ADDR,(uint32_t)App_boot_pSysInfo,sizeof(App_cSysInfo));
-						SaveParameter();	
-						SCB->AIRCR = (0x05fa << 16) + 1;
-					}
-			}
-			else
-			{
-					vUARTSendChar(tempDate);
-					uartBuffer[len++]= tempDate;
-					if(len>15)
-						len= 0;
-			}
-		}
 		
 	}
 }
-/*void uip_log(char *m)		//person2分支修改并提交
+/*void uip_log(char *m)		//othe branch change code and remove update function
 {
 	;
 }*/
