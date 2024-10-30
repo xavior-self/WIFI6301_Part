@@ -6316,12 +6316,43 @@ int main (void)
 		ADC_Check();
 		/************************喂狗**************************/
 		WDTFeed();
-		
+		/******串口发送update,回车回到boot,等待用户输入update更新应用层******/
+		/*if(u8UARTReceive(&tempDate)>0)		//先屏蔽不使用
+		{
+			if(tempDate==0x20)              //空格键
+			{
+					len = 0;
+					vUARTSend(konggejian, sizeof(konggejian));           //please input a update command
+			}
+			else if(tempDate==0x0D)         //回车键 
+			{
+					if((memcmp(uartBuffer,"update",6)==0)||(memcmp(uartBuffer,"Update",6)==0))
+					{
+						vUARTSend(update_app, sizeof(update_app));
+						App_boot_pSysInfo->download = 5;
+						//u32IAP_CopyRAMToFlash(FLASH_APP_ADDR,(uint32_t)App_boot_pSysInfo,sizeof(App_cSysInfo));
+						SaveParameter();	
+						SCB->AIRCR = (0x05fa << 16) + 1;
+					}
+			}
+			else
+			{
+					vUARTSendChar(tempDate);
+					uartBuffer[len++]= tempDate;
+					if(len>15)
+						len= 0;
+			}
+		}*/
 	}
 }
 /*void uip_log(char *m)		//othe branch change code and remove update function
 {
 	;
+	//printf("无用，单纯测试");
+}*/
+/*void last_func(void)
+{
+	//printf("send debug message\n");
 }*/
 /*********************************************************************************************************
   End Of File
