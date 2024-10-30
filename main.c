@@ -6317,7 +6317,7 @@ int main (void)
 		/************************喂狗**************************/
 		WDTFeed();
 		/******串口发送update,回车回到boot,等待用户输入update更新应用层******/
-		if(u8UARTReceive(&tempDate)>0)
+		/*if(u8UARTReceive(&tempDate)>0)
 		{
 			if(tempDate==0x20)              //空格键
 			{
@@ -6342,11 +6342,11 @@ int main (void)
 					if(len>15)
 						len= 0;
 			}
-		}
+		}*/
 		
 	}
 }
-/*void uip_log(char *m)		//person1分支修改
+/*void uip_log(char *m)		//person1分支修改,主分支修改内容
 {
 	;
 }*/
