@@ -6346,7 +6346,7 @@ int main (void)
 		
 	}
 }
-/*void uip_log(char *m)		//person1分支修改
+/*void uip_log(char *m)		//person2分支修改并提交
 {
 	;
 }*/
